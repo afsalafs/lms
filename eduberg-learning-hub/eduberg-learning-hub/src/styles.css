@@ -1,0 +1,313 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * EduBerg Learning Hub — design system.
+ * Warm paper background, deep terracotta accent, near-black ink.
+ * Retune the whole theme from the :root block below.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-paper-deep: var(--paper-deep);
+  --color-clay: var(--clay);
+  --color-olive: var(--olive);
+  --font-display: var(--font-display);
+  --font-sans: var(--font-body);
+}
+
+:root {
+  --radius: 0.375rem;
+
+  /* Core palette */
+  --paper: oklch(0.972 0.014 88);
+  --paper-deep: oklch(0.936 0.021 84);
+  --ink: oklch(0.205 0.014 60);
+  --clay: oklch(98.491% 0.00297 264.798); /* deep terracotta accent */
+  --olive: oklch(0.44 0.05 130);
+
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: oklch(0.985 0.01 88);
+  --card-foreground: var(--ink);
+  --popover: oklch(0.985 0.01 88);
+  --popover-foreground: var(--ink);
+  --primary: var(--clay);
+  --primary-foreground: oklch(0.98 0.012 88);
+  --secondary: var(--paper-deep);
+  --secondary-foreground: var(--ink);
+  --muted: var(--paper-deep);
+  --muted-foreground: oklch(0.47 0.018 62);
+  --accent: var(--clay);
+  --accent-foreground: oklch(0.98 0.012 88);
+  --destructive: oklch(0.512 0.166 27);
+  --destructive-foreground: oklch(0.98 0.012 88);
+  --border: oklch(0.86 0.021 82);
+  --input: oklch(0.86 0.021 82);
+  --ring: var(--clay);
+  --cta-gradient: linear-gradient(
+    135deg,
+    /* #603a7f 0%, */
+    #603a7f 10%,
+    #7a1e5d 30%,
+    #8f0f4d 55%,
+    #c0073b 70%
+  );
+
+  /* Typography */
+  /* --font-display: "Work Sans", ui-sans-serif, system-ui, sans-serif; */
+  --font-display: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Sans", ui-sans-serif, system-ui, sans-serif;
+
+  /* Spacing scale */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.75rem;
+  --space-4: 3rem;
+  --space-5: 5rem;
+  --space-6: 8rem;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--clay) 22%, transparent);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  blockquote,
+  .font-display {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    background-image: var(--cta-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Dark sections keep headings legible in the warm paper tone */
+  .band-ink h1,
+  .band-ink h2,
+  .band-ink h3,
+  .band-ink h4,
+  .band-ink blockquote,
+  .band-ink .font-display {
+    background-image: none;
+    color: var(--paper);
+    -webkit-text-fill-color: var(--paper);
+  }
+
+
+}
+
+@keyframes blink-cursor {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@utility animate-blink {
+  animation: blink-cursor 1s step-end infinite;
+}
+
+@utility bg-cta-gradient {
+  background-image: var(--cta-gradient);
+}
+@utility hover-cta-gradient-dark {
+  &:hover {
+    filter: brightness(0.9);
+  }
+}
+
+/* Editorial eyebrow label */
+@utility eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: color-mix(in oklab, var(--ink) 55%, var(--paper));
+}
+
+/* Hairline rule used to separate editorial bands */
+@utility rule-top {
+  border-top: 1px solid var(--border);
+}
+
+/* Intentional labelled image placeholder */
+@utility placeholder-frame {
+  position: relative;
+  background-image: linear-gradient(
+    135deg,
+    color-mix(in oklab, var(--clay) 8%, var(--paper-deep)),
+    var(--paper-deep)
+  );
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+@utility word-reveal {
+  display: inline-block;
+  font-weight: 400;
+  color: var(--muted-foreground);
+  opacity: 0.4;
+  filter: blur(0.3px);
+  margin-right: 0.28em;
+  transition:
+    color 0.35s ease,
+    opacity 0.35s ease,
+    font-weight 0.1s ease,
+    filter 0.35s ease;
+}
+@utility word-reveal-active {
+  color: var(--ink);
+  font-weight: 500;
+  opacity: 1;
+  filter: blur(0);
+}
+@utility word-reveal-accent {
+  color: var(--clay);
+}
+
+/* Nav links: hovering the list fades all links; hovering one link
+   brings it back to full opacity, black text, and an underline that
+   grows outward from the center. */
+@layer utilities {
+  .nav-links a {
+    position: relative;
+    transition: opacity 0.25s ease, color 0.25s ease;
+  }
+  .nav-links:hover a {
+    opacity: 0.4;
+  }
+  .nav-links a:hover {
+    opacity: 1;
+    color: var(--ink);
+  }
+
+  .nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -8px;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.3s ease;
+  }
+  .nav-links a:hover::after {
+    transform: scaleX(1);
+  }
+}
+
+/* Hero body copy + inline keyword highlights */
+@layer utilities {
+  .hero-wrap {
+    margin-top: 1.75rem;
+    /* max-width: 36rem; */
+  }
+
+  .hero-text {
+    font-size: 1.125rem;
+    line-height: 1.75;
+    color: white;
+  }
+
+  .hero-text .accent {
+    color: var(--clay);
+    font-weight: 600;
+  }
+}
+
+/* Scroll reveal (progressively enhanced by IntersectionObserver) */
+@layer utilities {
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
